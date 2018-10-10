@@ -9,7 +9,21 @@
 namespace App\Shop\Product\Repository;
 
 
-class PictureRepository
+use App\Repositories\BaseRepository;
+use App\Shop\Product\Model\PictureModel;
+
+class PictureRepository extends BaseRepository
 {
+    protected $model;
+
+    /**
+     * PictureRepository constructor.
+     * @param $model
+     */
+    public function __construct(PictureModel $model)
+    {
+        $this->model = $model;
+    }
+
 
 }

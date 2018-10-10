@@ -14,17 +14,17 @@
                     @endif
                 </a>
             </li>
-            {{--@if(isset($images) && !$images->isEmpty())--}}
-                {{--@foreach($images as $image)--}}
-                {{--<li>--}}
-                    {{--<a href="javascript: void(0)">--}}
-                    {{--<img class="img-responsive img-thumbnail"--}}
-                         {{--src="{{ asset("storage/$image->src") }}"--}}
-                         {{--alt="{{ $product->name }}" />--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-                {{--@endforeach--}}
-            {{--@endif--}}
+            @if(isset($images) && !$images->isEmpty())
+                @foreach($images as $image)
+                <li>
+                    <a href="javascript: void(0)">
+                    <img class="img-responsive img-thumbnail"
+                         src="{{ asset("storage/$image->src") }}"
+                         alt="{{ $product->name }}" />
+                    </a>
+                </li>
+                @endforeach
+            @endif
         </ul>
         <figure class="text-center product-cover-wrap col-md-8">
             @if(isset($product->cover))

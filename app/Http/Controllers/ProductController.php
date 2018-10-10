@@ -10,28 +10,49 @@ namespace App\Http\Controllers;
 
 
 use App\Services\ModelServices\ProductModelService;
+use App\Shop\Category\Repository\CategoryRerpository;
+use App\Shop\Product\Repository\ProductRepository;
 
+/**
+ * Class ProductController
+ * @package App\Http\Controllers
+ */
 class ProductController extends Controller
 {
-    private $service;
+    /**
+     * @var ProductRepository
+     */
+    private $productRepository;
+
+    private $categoryRepository;
 
     /**
      * CategoryController constructor.
      * @param $model
      */
-    public function __construct(ProductModelService $service)
+    public function __construct(ProductRepository $repository, CategoryRerpository $categoryRepository)
     {
-        $this->service = $service;
+        $this->productRepository = $repository;
+        $this->categoryRepository = $categoryRepository;
     }
 
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(){
-        $products = $this->service->getAll();
+        $products = $this->productRepository->all();
 
-        $product = $products[0];
+        $product = $products[1];
 
-        return view('front.products.product',compact('product','products'));
+        $category = $this->categoryRepository->find($product->category_id);
+
+
+
+        return view('front.products.product',compact('product','products','category'));
     }
+
+
 
 
 }

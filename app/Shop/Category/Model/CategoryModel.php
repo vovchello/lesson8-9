@@ -17,6 +17,8 @@ class CategoryModel extends Model
 
     protected $table = 'categories';
 
+    protected $connection = "collection";
+
     public function getName()
     {
         return $this->getAttribute('name');

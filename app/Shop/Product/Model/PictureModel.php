@@ -9,7 +9,9 @@
 namespace App\Shop\Product\Model;
 
 
-class PictureModel
-{
+use App\Models\Model;
 
+class PictureModel extends Model
+{
+    protected $table = 'product_images';
 }

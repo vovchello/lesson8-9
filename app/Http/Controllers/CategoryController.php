@@ -10,27 +10,35 @@ namespace App\Http\Controllers;
 
 
 use App\Shop\Category\Repository\CategoryRerpository;
+use App\Shop\Product\Repository\ProductRepository;
 
 class CategoryController extends Controller
 {
-    private $repository;
+    private $categoryRepository;
 
-    /**
-     * CategoryController constructor.
-     * @param $model
-     */
-    public function __construct(CategoryRerpository $repository)
+
+    private $productRepository;
+
+    public function __construct(CategoryRerpository $categoryRepository, ProductRepository $productRepository)
     {
-        $this->repository = $repository;
+        $this->categoryRepository = $categoryRepository;
+
+        $this->productRepository = $productRepository;
     }
 
 
     public function index(){
-        $categories = $this->repository->all();
 
-        $category = $categories[0];
 
-        return view('front.categories.category',compact('category','categories'));
+        $categories = $this->categoryRepository->all();
+
+        $category = $this->categoryRepository->find(1);
+
+        $products = $this->productRepository->all();
+
+
+
+        return view('front.categories.category',compact('category','categories','products'));
     }
 
 
